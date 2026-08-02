@@ -1,0 +1,87 @@
+generated: '2026-08-01'
+method: searched
+source: live GET probes of /.well-known/* on every Deep Instinct host in apis.yml
+notes: >-
+  portal.deepinstinct.com is the only Deep Instinct host that serves any /.well-known/ discovery
+  documents. Both hits are the OAuth discovery pair that fronts the portal's MCP server: RFC 8414
+  authorization-server metadata and RFC 9728 protected-resource metadata. The marketing site
+  (www.deepinstinct.com, Netlify) returns 404 for every probed path, including security.txt. The DSX
+  management REST API is served from each customer's own tenant FQDN and has no anonymously reachable
+  host to probe.
+hosts:
+- host: https://portal.deepinstinct.com
+  documents:
+  - path: /.well-known/oauth-authorization-server
+    spec: RFC 8414
+    status: 200
+    content_type: application/json
+    file: deep-instinct-oauth-authorization-server.json
+  - path: /.well-known/oauth-protected-resource
+    spec: RFC 9728
+    status: 200
+    content_type: application/json
+    file: deep-instinct-oauth-protected-resource.json
+  - path: /.well-known/security.txt
+    spec: RFC 9116
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /llms.txt
+    status: 404
+  - path: /openapi.json
+    status: 404
+  - path: /swagger.json
+    status: 404
+- host: https://www.deepinstinct.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /llms.txt
+    status: 404
+- host: https://deepinstinct.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+x-evidence:
+  fetched: '2026-08-01'
+  method: curl GET, follow redirects, 15-20s timeout
+  hosts_probed:
+  - www.deepinstinct.com
+  - deepinstinct.com
+  - portal.deepinstinct.com
+  unresolvable_hosts:
+  - docs.deepinstinct.com
+  - developer.deepinstinct.com
+  - api.deepinstinct.com
+  - support.deepinstinct.com
+  - status.deepinstinct.com
+  - trust.deepinstinct.com
+  - deepinstinctweb.com

@@ -1,0 +1,81 @@
+generated: '2026-08-01'
+method: searched
+source: >-
+  https://xsoar.pan.dev/docs/reference/integrations/deep-instinct +
+  https://docs.d3security.com/integration-docs/integration-docs/deep-instinct-v2 +
+  live probes of https://portal.deepinstinct.com/mcp
+note: >-
+  Deep Instinct's own API reference is served per tenant and is not anonymously reachable, so these
+  conventions are taken from published third-party integration documentation that consumes the API and
+  from live probes of the MCP surface. Anything not evidenced is recorded as unknown rather than guessed.
+surfaces:
+  rest:
+    base: 'https://<tenant-fqdn>/api/v1'
+    style: REST over HTTPS, JSON request/response
+  mcp:
+    endpoint: https://portal.deepinstinct.com/mcp
+    style: JSON-RPC 2.0 (Model Context Protocol), auth-gated
+authentication:
+  rest: API key issued in the DSX management console (see authentication/deep-instinct-authentication.yml)
+  mcp: OAuth 2.1 bearer token in the Authorization header, scopes mcp:read / mcp:write
+  artifact: authentication/deep-instinct-authentication.yml
+idempotency:
+  supported: unknown
+  header: null
+  evidence: null
+  note: >-
+    No idempotency key or replay-safety contract is documented on any anonymously reachable Deep Instinct
+    surface, and no third-party integration references one. Recorded as unknown; no Idempotency pointer
+    is emitted in apis.yml.
+pagination:
+  style: high-watermark cursor
+  page_size: 50
+  page_size_fixed: true
+  request:
+    method: POST
+    path: /api/v1/events/search
+    body: JSON search-parameter object
+  response_fields:
+  - last_id
+  note: >-
+    The event search method returns results in pages of up to 50 events together with a "high watermark"
+    value that the client passes back to request the next page until the result set is exhausted. Field
+    naming is not confirmed against the vendor reference; the mechanism is confirmed by two independent
+    published sources.
+  evidence:
+  - 'D3 Security integration docs: "Fetches events (max 50 per response)"'
+  - 'Deep Instinct field-engineering write-up describing the high-watermark paging loop over /api/v1/events/search'
+  confidence: medium
+filtering:
+  style: JSON search document
+  note: >-
+    /api/v1/events/search accepts a JSON body of search parameters mirroring the saved event views in the
+    management console UI.
+error_envelope:
+  rest:
+    shape: unknown
+    note: 'Not documented on any anonymously reachable surface.'
+  mcp:
+    shape: JSON-RPC 2.0 error object
+    fields: [jsonrpc, id, error.code, error.message]
+    observed: 'code -32600, message "MCP is not available for guest users. Please log in to access this feature."'
+    artifact: errors/deep-instinct-problem-types.yml
+rate_limiting:
+  documented: false
+  headers: null
+versioning:
+  scheme: uri-path
+  current: v1
+  artifact: lifecycle/deep-instinct-lifecycle.yml
+request_tracing:
+  header: null
+  documented: false
+tenancy:
+  model: per-customer appliance
+  note: >-
+    Each customer's DSX management console (D-Appliance) is its own host and its own API origin, so there
+    is no shared public API hostname, no shared docs host, and no anonymous discovery surface for REST.
+gaps:
+- No public API reference, so header names, error envelope and rate-limit signalling are unrecorded.
+- No documented idempotency contract.
+- No documented rate-limit headers.

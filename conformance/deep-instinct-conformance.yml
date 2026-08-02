@@ -1,0 +1,76 @@
+generated: '2026-08-01'
+method: searched
+source: >-
+  live /.well-known probes on portal.deepinstinct.com +
+  https://www.deepinstinct.com/compliance-certification-evaluation
+note: >-
+  Deep Instinct publishes no OpenAPI, so nothing here is derived from a spec. Every "conforms: true"
+  below is anchored to a document that was fetched, or to a certification the vendor names publicly.
+standards:
+- id: oauth2
+  conforms: true
+  evidence: >-
+    portal.deepinstinct.com serves OAuth 2.1 authorization-code + refresh-token flows with S256 PKCE
+    (well-known/deep-instinct-oauth-authorization-server.json).
+- id: rfc8414-authorization-server-metadata
+  conforms: true
+  evidence: 'GET https://portal.deepinstinct.com/.well-known/oauth-authorization-server -> 200 application/json'
+- id: rfc9728-protected-resource-metadata
+  conforms: true
+  evidence: 'GET https://portal.deepinstinct.com/.well-known/oauth-protected-resource -> 200 application/json'
+- id: rfc7591-dynamic-client-registration
+  conforms: true
+  evidence: 'registration_endpoint https://portal.deepinstinct.com/oauth/register advertised in AS metadata'
+- id: rfc7636-pkce
+  conforms: true
+  evidence: 'code_challenge_methods_supported: [S256]'
+- id: rfc7009-token-revocation
+  conforms: true
+  evidence: 'revocation_endpoint https://portal.deepinstinct.com/oauth/revoke advertised in AS metadata'
+- id: model-context-protocol
+  conforms: true
+  evidence: >-
+    JSON-RPC 2.0 MCP endpoint at https://portal.deepinstinct.com/mcp; responds to tools/list and
+    initialize with well-formed JSON-RPC (auth-gated for guests).
+- id: openid-connect
+  conforms: false
+  evidence: 'no /.well-known/openid-configuration on any Deep Instinct host (404)'
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: 'no /.well-known/security.txt on www.deepinstinct.com, deepinstinct.com or portal.deepinstinct.com (404)'
+- id: openapi
+  conforms: false
+  evidence: >-
+    no public OpenAPI/Swagger document; the DSX API reference is a per-tenant Swagger UI at
+    https://<customer-fqdn>/api/v1/ and is not anonymously reachable.
+- id: asyncapi
+  conforms: false
+  evidence: 'no published AsyncAPI or public webhook catalog found'
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: 'no spec or public error reference to evidence problem+json'
+- id: a2a-agent-card
+  conforms: false
+  evidence: '/.well-known/agent-card.json and /.well-known/agent.json 404 on every Deep Instinct host'
+compliance_programs:
+- id: soc2-type-ii
+  conforms: true
+  evidence: https://www.deepinstinct.com/compliance-certification-evaluation
+- id: iso-27001
+  conforms: true
+  evidence: https://www.deepinstinct.com/compliance-certification-evaluation
+- id: iso-27017
+  conforms: true
+  evidence: https://www.deepinstinct.com/compliance-certification-evaluation
+- id: iso-27018
+  conforms: true
+  evidence: https://www.deepinstinct.com/compliance-certification-evaluation
+- id: pci-dss
+  conforms: true
+  evidence: 'validated by Coalfire Systems, per https://www.deepinstinct.com/compliance-certification-evaluation'
+- id: gdpr
+  conforms: true
+  evidence: 'validated by Coalfire Systems, per https://www.deepinstinct.com/compliance-certification-evaluation'
+- id: fedramp
+  conforms: false
+  evidence: 'not claimed on the published compliance page'

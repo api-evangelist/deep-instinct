@@ -1,0 +1,35 @@
+generated: '2026-08-01'
+method: searched
+probe: false
+probe_note: >-
+  0-working/probe-security-programs.py returned trust=none — trust.deepinstinct.com,
+  security.deepinstinct.com do not resolve and /trust, /security, /compliance on www.deepinstinct.com
+  all return 404. The compliance posture is published at a non-standard path found by search.
+url: https://www.deepinstinct.com/compliance-certification-evaluation
+title: Integrations and Compliance / Compliance, Certification & Evaluation
+certifications:
+- SOC 2 Type II
+- ISO/IEC 27001
+- ISO/IEC 27017
+- ISO/IEC 27018:2019
+- PCI DSS
+- GDPR
+attestation_notes:
+- 'SOC 2 Type II: in accordance with the AICPA framework.'
+- 'PCI DSS and GDPR: validated by Coalfire Systems.'
+third_party_evaluations:
+- MITRE Engenuity ATT&CK Evaluations
+- SE Labs AAA Award, Enterprise Endpoint Protection
+- Unit 221B product assessment
+- SANS product review
+- Gartner Magic Quadrant for Endpoint Protection Platforms (2022)
+memberships:
+- Anti-Malware Testing Standards Organization (AMTSO)
+- World Economic Forum Technology Pioneer
+evidence:
+- source: https://www.deepinstinct.com/compliance-certification-evaluation
+  http_status: 200
+  keywords: [soc 2 type ii, iso/iec 27001, iso/iec 27017, iso/iec 27018, pci dss, gdpr, aicpa, coalfire]
+gaps:
+- No dedicated trust center portal (no trust.deepinstinct.com, no SafeBase/Vanta-style page).
+- No self-serve evidence/report request flow published on the page.

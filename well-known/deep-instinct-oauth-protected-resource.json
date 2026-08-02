@@ -1,0 +1,13 @@
+{
+  "resource": "https://portal.deepinstinct.com/mcp",
+  "authorization_servers": [
+    "https://portal.deepinstinct.com"
+  ],
+  "bearer_methods_supported": [
+    "header"
+  ],
+  "scopes_supported": [
+    "mcp:read",
+    "mcp:write"
+  ]
+}

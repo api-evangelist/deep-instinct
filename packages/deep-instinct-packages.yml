@@ -1,0 +1,36 @@
+generated: '2026-08-01'
+method: searched
+source: npm, PyPI, GitHub search, Deep Instinct GitHub organization
+summary:
+  official_packages: 0
+  community_packages: 1
+  note: >-
+    Deep Instinct ships no first-party client library on any public registry. Its GitHub organization
+    (github.com/deepinstinct) publishes 27 repositories, all threat-research tooling, PoCs and IOC dumps
+    from the Deep Instinct research team — no SDK, no API wrapper, no .proto. No SDKs pointer is emitted
+    in apis.yml, because no official SDK exists.
+packages: []
+community:
+- language: python
+  registry: github
+  name: deepinstinct-rest-api-wrapper
+  url: https://github.com/pvz01/deepinstinct-rest-api-wrapper
+  install: 'git clone https://github.com/pvz01/deepinstinct-rest-api-wrapper'
+  official: false
+  modules:
+  - {file: deepinstinct3.py, targets: D-Appliance 3.x}
+  - {file: deepinstinct25.py, targets: D-Appliance 2.5.x}
+  - {file: deepinstinctagentless.py, targets: Agentless Connector 2.3.2.0p}
+  disclaimer: >-
+    Per the repository README: "This API Wrapper is not a Deep Instinct commercial product and is not
+    officially supported, although the underlying REST API is." The author also states they are no
+    longer associated with Deep Instinct Ltd.
+registries_checked:
+- {registry: npm, query: 'deepinstinct / @deepinstinct/*', result: no first-party package}
+- {registry: pypi, query: 'deepinstinct, deepinstinct30, deep-instinct', result: 404}
+- {registry: github, query: 'deepinstinct in:name', result: 'research repos only, plus community wrapper'}
+- {registry: maven-central, result: not found}
+- {registry: nuget, result: not found}
+- {registry: rubygems, result: not found}
+- {registry: packagist, result: not found}
+- {registry: crates.io, result: not found}

@@ -1,0 +1,45 @@
+generated: '2026-08-01'
+method: probed
+source: https://portal.deepinstinct.com/.well-known/oauth-authorization-server
+note: >-
+  Deep Instinct publishes no OpenAPI with oauth2 securitySchemes, so there is no spec to derive from.
+  These scopes were read verbatim from the live RFC 8414 authorization-server metadata and the RFC 9728
+  protected-resource metadata on portal.deepinstinct.com, which front the portal MCP server. The DSX
+  management REST API uses an API key rather than OAuth and contributes no scopes.
+schemes:
+- name: portal-oauth
+  type: oauth2
+  issuer: https://portal.deepinstinct.com
+  source: https://portal.deepinstinct.com/.well-known/oauth-authorization-server
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://portal.deepinstinct.com/oauth/authorize
+    tokenUrl: https://portal.deepinstinct.com/oauth/token
+    refreshUrl: https://portal.deepinstinct.com/oauth/token
+    code_challenge_methods: [S256]
+scopes:
+- scope: mcp:read
+  description: >-
+    Read access through the portal MCP server. Description is not published by Deep Instinct; the scope
+    string is verbatim from scopes_supported in both discovery documents.
+  flows: [authorizationCode]
+  sources:
+  - well-known/deep-instinct-oauth-authorization-server.json
+  - well-known/deep-instinct-oauth-protected-resource.json
+- scope: mcp:write
+  description: >-
+    Write access through the portal MCP server. Description is not published by Deep Instinct; the scope
+    string is verbatim from scopes_supported in both discovery documents.
+  flows: [authorizationCode]
+  sources:
+  - well-known/deep-instinct-oauth-authorization-server.json
+  - well-known/deep-instinct-oauth-protected-resource.json
+resource:
+  resource: https://portal.deepinstinct.com/mcp
+  authorization_servers: [https://portal.deepinstinct.com]
+  bearer_methods_supported: [header]
+x-evidence:
+  fetched: '2026-08-01'
+  url: https://portal.deepinstinct.com/.well-known/oauth-authorization-server
+  http_status: 200
+  content_type: application/json

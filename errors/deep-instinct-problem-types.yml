@@ -1,0 +1,43 @@
+generated: '2026-08-01'
+method: probed
+source: 'POST https://portal.deepinstinct.com/mcp'
+format: jsonrpc-2.0
+completeness: partial
+note: >-
+  Deep Instinct publishes no OpenAPI and no anonymously reachable error reference, so there is nothing to
+  derive a full catalogue from. This file records only errors actually observed on a reachable surface —
+  the MCP endpoint's JSON-RPC error envelope. The DSX REST API's error shape is unknown and is
+  deliberately NOT modelled here.
+envelope:
+  surface: https://portal.deepinstinct.com/mcp
+  shape: JSON-RPC 2.0 error object
+  fields:
+  - jsonrpc
+  - id
+  - error.code
+  - error.message
+  http_status_on_error: 200
+  note: >-
+    Errors are returned with HTTP 200 and the failure carried in the JSON-RPC error member, per JSON-RPC
+    2.0 over HTTP. Note the server echoes id 0 rather than the request id.
+problems:
+- code: -32600
+  jsonrpc_class: Invalid Request
+  title: MCP is not available for guest users
+  message: 'MCP is not available for guest users. Please log in to access this feature.'
+  http_status: 200
+  cause: 'Unauthenticated (no OAuth 2.1 bearer token) JSON-RPC call to the MCP endpoint.'
+  remediation: >-
+    Complete the OAuth 2.1 authorization-code + PKCE flow against
+    https://portal.deepinstinct.com/oauth/authorize, request the mcp:read and/or mcp:write scopes, and
+    send the resulting access token as an Authorization: Bearer header.
+  observed_on: [tools/list, initialize]
+  source_probe: 'POST https://portal.deepinstinct.com/mcp'
+gaps:
+- No public error reference for the DSX management REST API.
+- No RFC 9457 application/problem+json usage evidenced on any reachable surface.
+x-evidence:
+  fetched: '2026-08-01'
+  url: https://portal.deepinstinct.com/mcp
+  http_status: 200
+  content_type: application/json

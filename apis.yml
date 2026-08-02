@@ -1,18 +1,84 @@
 aid: deep-instinct
 name: Deep Instinct
-description: 'Deep Instinct is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: >-
+  Deep Instinct is a preemptive data security company that applies a purpose-built deep learning framework
+  (the DSX Brain) to prevent and explain unknown malware, ransomware and zero-day threats in real time,
+  without signatures, heuristics, cloud lookups or external threat feeds. Its DSX platform protects data
+  across cloud storage, network-attached storage (Dell CAVA, NetApp Vscan), applications and endpoints,
+  and pairs the prevention engine with DSX Companion (DIANNA), a GenAI analysis assistant that produces
+  human-readable explanations of novel attacks for SOC triage. The DSX management console (D-Appliance)
+  exposes a versioned REST API at /api/v1 for device, group, policy, event, hash allow/block-list, remote
+  remediation and audit-log automation, and Deep Instinct's customer portal now also fronts an
+  OAuth-protected MCP server for agent access to portal content.
+image: https://www.deepinstinct.com/image/bltefff210f63a383a8/68937a472607b85c9942030a/Meta_Home_1200_x_627.png
 url: https://raw.githubusercontent.com/api-evangelist/deep-instinct/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
-specificationVersion: '0.20'
+x-harvest-source-url: https://forgeglobal.com/deep-instinct_stock/
+specificationVersion: '0.21'
 created: '2026-08-01'
 modified: '2026-08-01'
 tags:
-- Company
-apis: []
+- cybersecurity
+- endpoint-security
+- malware-prevention
+- ransomware
+- deep-learning
+- threat-prevention
+- data-security
+- edr
+- soc-automation
+- mcp
+apis:
+- name: Deep Instinct DSX Management REST API
+  description: >-
+    Versioned REST API exposed by the Deep Instinct DSX management console (D-Appliance) at
+    https://<your-tenant-fqdn>/api/v1. Covers devices, device groups, policies, events (including the
+    JSON event-search method /api/v1/events/search), hash allow/block lists, remote file deletion and
+    process termination, exclusions, licensing and audit logs. Authentication is an API key issued in the
+    console and sent on the request. The API and its interactive documentation are served from each
+    customer's own tenant host, so neither the docs nor a machine-readable specification are reachable
+    anonymously on the public internet.
+  humanURL: https://portal.deepinstinct.com/
+  baseURL: https://your-tenant.customers.deepinstinctweb.com/api/v1
+  tags:
+  - cybersecurity
+  - endpoint-security
+  - threat-prevention
+  - soc-automation
+  - edr
+  properties:
+  - type: Authentication
+    url: authentication/deep-instinct-authentication.yml
+  - type: Conventions
+    url: conventions/deep-instinct-conventions.yml
+  - type: Lifecycle
+    url: lifecycle/deep-instinct-lifecycle.yml
+- name: Deep Instinct Portal MCP Server
+  description: >-
+    Model Context Protocol server hosted on Deep Instinct's customer portal at
+    https://portal.deepinstinct.com/mcp, advertised through RFC 9728 protected-resource metadata and an
+    RFC 8414 authorization-server document on the same host. Access is OAuth 2.1 (authorization code +
+    PKCE S256, refresh tokens, dynamic client registration) scoped by mcp:read and mcp:write. An
+    anonymous tools/list call is refused with "MCP is not available for guest users", so the live tool
+    schemas require an authenticated portal session.
+  humanURL: https://portal.deepinstinct.com/mcp
+  baseURL: https://portal.deepinstinct.com/mcp
+  tags:
+  - mcp
+  - agent-native
+  - cybersecurity
+  properties:
+  - type: MCPServer
+    url: mcp/deep-instinct-mcp.yml
+  - type: MCP
+    url: https://portal.deepinstinct.com/mcp
+  - type: OAuthScopes
+    url: scopes/deep-instinct-scopes.yml
+  - type: Authentication
+    url: authentication/deep-instinct-authentication.yml
+  - type: WellKnown
+    url: well-known/deep-instinct-well-known.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -20,4 +86,53 @@ maintainers:
   email: info@apis.io
 common:
 - type: Website
-  url: https://forgeglobal.com/deep-instinct_stock/
+  url: https://www.deepinstinct.com/
+- type: DeveloperPortal
+  url: https://portal.deepinstinct.com/
+- type: Support
+  url: https://www.deepinstinct.com/contact-us
+- type: Blog
+  url: https://www.deepinstinct.com/blog
+- type: BlogRSS
+  url: https://www.deepinstinct.com/blog/feed
+- type: GitHubOrganization
+  url: https://github.com/deepinstinct
+- type: SignUp
+  url: https://www.deepinstinct.com/request-a-demo
+- type: Login
+  url: https://portal.deepinstinct.com/
+- type: TermsOfService
+  url: https://www.deepinstinct.com/terms-of-use
+- type: PrivacyPolicy
+  url: https://www.deepinstinct.com/privacy-policy
+- type: Compliance
+  url: https://www.deepinstinct.com/compliance-certification-evaluation
+- type: MCPServer
+  url: mcp/deep-instinct-mcp.yml
+- type: OAuthScopes
+  url: scopes/deep-instinct-scopes.yml
+- type: Authentication
+  url: authentication/deep-instinct-authentication.yml
+- type: WellKnown
+  url: well-known/deep-instinct-well-known.yml
+- type: Conventions
+  url: conventions/deep-instinct-conventions.yml
+- type: Conformance
+  url: conformance/deep-instinct-conformance.yml
+- type: Lifecycle
+  url: lifecycle/deep-instinct-lifecycle.yml
+- type: TrustCenter
+  url: security/deep-instinct-trust-center.yml
+- type: DomainSecurity
+  url: security/deep-instinct-domain-security.yml
+- type: Packages
+  url: packages/deep-instinct-packages.yml
+- type: ErrorCatalog
+  url: errors/deep-instinct-problem-types.yml
+- type: LLMsTxt
+  url: llms/deep-instinct-llms.txt
+x-enrichment:
+  date: '2026-08-01'
+  status: enriched
+  artifacts_added: 14
+  pass: local-v1

@@ -1,0 +1,44 @@
+generated: '2026-08-01'
+method: searched
+source: >-
+  https://portal.deepinstinct.com/ + third-party integration documentation (XSOAR, D3 Security,
+  Securonix, Axonius) + live host probes
+versioning:
+  scheme: uri-path
+  current: v1
+  path: /api/v1
+  evidence: >-
+    Every documented Deep Instinct integration targets /api/v1 on the tenant management console
+    (e.g. /api/v1/events/search). Third-party docs also record the D-Appliance product versions the
+    API was validated against (2.3.x, 2.5.x, 3.x), which track the appliance release, not the API path.
+  docs: null
+  docs_note: >-
+    The DSX API reference is a Swagger UI served per tenant at https://<your-fqdn>/api/v1/; there is no
+    anonymously reachable versioning-policy page.
+deprecation:
+  policy_url: null
+  sunset_header: unknown
+  found: false
+  note: 'No public deprecation policy and no evidence of RFC 8594 Sunset/Deprecation header support.'
+sla:
+  url: null
+  uptime_target: null
+  found: false
+status_page:
+  url: null
+  found: false
+  probes:
+  - {host: status.deepinstinct.com, result: NXDOMAIN}
+  - {url: 'https://www.deepinstinct.com/status', result: 404}
+changelog:
+  url: null
+  found: false
+  note: >-
+    Release notes are distributed through the gated customer portal (portal.deepinstinct.com); no public
+    dated changelog was found.
+deprecated_operations: []
+gaps:
+- No public status page.
+- No public deprecation or version-support policy.
+- No public changelog or release-notes feed.
+- No published SLA.
