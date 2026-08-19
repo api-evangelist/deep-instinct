@@ -15,7 +15,7 @@ url: https://raw.githubusercontent.com/api-evangelist/deep-instinct/refs/heads/m
 x-type: company
 x-source: harvest:secondary-market
 x-harvest-source-url: https://forgeglobal.com/deep-instinct_stock/
-specificationVersion: '0.21'
+specificationVersion: '0.23'
 created: '2026-08-01'
 modified: '2026-08-01'
 tags:
