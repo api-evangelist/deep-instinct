@@ -8,10 +8,9 @@ server:
   url: https://portal.deepinstinct.com/mcp
   service_documentation: https://portal.deepinstinct.com/mcp
   host: portal.deepinstinct.com
-  platform: >-
-    The Deep Instinct customer portal runs on Magentrix (portal.deepinstinct.com CNAMEs to
-    deepinstinct.magentrixcloud.com); the MCP endpoint is served from Deep Instinct's own host and
-    issuer, so it is a Deep Instinct surface, but the server implementation is the portal platform's.
+  platform: The Deep Instinct customer portal runs on Magentrix (portal.deepinstinct.com CNAMEs to deepinstinct.magentrixcloud.com);
+    the MCP endpoint is served from Deep Instinct's own host and issuer, so it is a Deep Instinct surface,
+    but the server implementation is the portal platform's.
 authorization:
   model: OAuth 2.1
   issuer: https://portal.deepinstinct.com
@@ -19,22 +18,28 @@ authorization:
   token_endpoint: https://portal.deepinstinct.com/oauth/token
   registration_endpoint: https://portal.deepinstinct.com/oauth/register
   revocation_endpoint: https://portal.deepinstinct.com/oauth/revoke
-  grant_types: [authorization_code, refresh_token]
-  code_challenge_methods: [S256]
-  token_endpoint_auth_methods: [client_secret_post]
+  grant_types:
+  - authorization_code
+  - refresh_token
+  code_challenge_methods:
+  - S256
+  token_endpoint_auth_methods:
+  - client_secret_post
   dynamic_client_registration: true
-  bearer_methods_supported: [header]
-  scopes: [mcp:read, mcp:write]
+  bearer_methods_supported:
+  - header
+  scopes:
+  - mcp:read
+  - mcp:write
   scopes_artifact: scopes/deep-instinct-scopes.yml
 tools:
   discovered: false
   gated: true
-  note: >-
-    An anonymous JSON-RPC tools/list POST returns HTTP 200 with a JSON-RPC error
-    (code -32600, "MCP is not available for guest users. Please log in to access this feature."), as
-    does initialize. The live tool set and per-tool inputSchema therefore require an authenticated
-    portal session and cannot be harvested anonymously. No tool list is published in docs, llms.txt or
-    any registry, so NOTHING is recorded here rather than guessed.
+  note: An anonymous JSON-RPC tools/list POST returns HTTP 200 with a JSON-RPC error (code -32600, "MCP
+    is not available for guest users. Please log in to access this feature."), as does initialize. The
+    live tool set and per-tool inputSchema therefore require an authenticated portal session and cannot
+    be harvested anonymously. No tool list is published in docs, llms.txt or any registry, so NOTHING
+    is recorded here rather than guessed.
 x-evidence:
   fetched: '2026-08-01'
   probes:
@@ -49,10 +54,17 @@ x-evidence:
     content_type: application/json
     file: ../well-known/deep-instinct-oauth-authorization-server.json
   - url: https://portal.deepinstinct.com/mcp
-    method: 'POST {"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+    method: POST {"jsonrpc":"2.0","id":1,"method":"tools/list"}
     http_status: 200
     body: 'jsonrpc error -32600: MCP is not available for guest users. Please log in to access this feature.'
   - url: https://portal.deepinstinct.com/mcp
-    method: 'POST {"jsonrpc":"2.0","id":1,"method":"initialize"}'
+    method: POST {"jsonrpc":"2.0","id":1,"method":"initialize"}
     http_status: 200
     body: 'jsonrpc error -32600: MCP is not available for guest users. Please log in to access this feature.'
+deployment:
+  mode: remote
+  endpoint: https://portal.deepinstinct.com/mcp
+  verified: probed
+  probe: live
+  checked: '2026-08-12'
+  source: catalog MCP census
