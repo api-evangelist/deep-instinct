@@ -19,6 +19,17 @@ specificationVersion: '0.23'
 created: '2026-08-01'
 modified: '2026-08-01'
 tags:
+- Cybersecurity
+- Endpoint Security
+- malware-prevention
+- Ransomware
+- Deep Learning
+- Threat Prevention
+- Data Security
+- EDR
+- SOC Automation
+- MCP
+tags_raw:
 - cybersecurity
 - endpoint-security
 - malware-prevention
@@ -42,6 +53,12 @@ apis:
   humanURL: https://portal.deepinstinct.com/
   baseURL: https://your-tenant.customers.deepinstinctweb.com/api/v1
   tags:
+  - Cybersecurity
+  - Endpoint Security
+  - Threat Prevention
+  - SOC Automation
+  - EDR
+  tags_raw:
   - cybersecurity
   - endpoint-security
   - threat-prevention
@@ -65,6 +82,10 @@ apis:
   humanURL: https://portal.deepinstinct.com/mcp
   baseURL: https://portal.deepinstinct.com/mcp
   tags:
+  - MCP
+  - agent-native
+  - Cybersecurity
+  tags_raw:
   - mcp
   - agent-native
   - cybersecurity
