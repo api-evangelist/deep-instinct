@@ -10,6 +10,17 @@ description: >-
   exposes a versioned REST API at /api/v1 for device, group, policy, event, hash allow/block-list, remote
   remediation and audit-log automation, and Deep Instinct's customer portal now also fronts an
   OAuth-protected MCP server for agent access to portal content.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://www.deepinstinct.com/image/bltefff210f63a383a8/68937a472607b85c9942030a/Meta_Home_1200_x_627.png
 url: https://raw.githubusercontent.com/api-evangelist/deep-instinct/refs/heads/main/apis.yml
 x-type: company
