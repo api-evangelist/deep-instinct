@@ -31,14 +31,14 @@ created: '2026-08-01'
 modified: '2026-08-01'
 tags:
 - Cybersecurity
-- Endpoint Security
+- endpoint-security
 - malware-prevention
-- Ransomware
-- Deep Learning
-- Threat Prevention
-- Data Security
-- EDR
-- SOC Automation
+- ransomware
+- deep-learning
+- threat-prevention
+- data-security
+- edr
+- soc-automation
 - MCP
 tags_raw:
 - cybersecurity
@@ -65,10 +65,10 @@ apis:
   baseURL: https://your-tenant.customers.deepinstinctweb.com/api/v1
   tags:
   - Cybersecurity
-  - Endpoint Security
-  - Threat Prevention
-  - SOC Automation
-  - EDR
+  - endpoint-security
+  - threat-prevention
+  - soc-automation
+  - edr
   tags_raw:
   - cybersecurity
   - endpoint-security
