@@ -21,6 +21,20 @@ deliveryModel:
   - pricing
   generated: '2026-08-28'
   method: derived
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  - scopes
+  - security
+  generated: '2026-09-02'
+  method: derived
 image: https://www.deepinstinct.com/image/bltefff210f63a383a8/68937a472607b85c9942030a/Meta_Home_1200_x_627.png
 url: https://raw.githubusercontent.com/api-evangelist/deep-instinct/refs/heads/main/apis.yml
 x-type: company
