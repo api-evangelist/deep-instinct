@@ -108,7 +108,7 @@ apis:
   baseURL: https://portal.deepinstinct.com/mcp
   tags:
   - MCP
-  - agent-native
+  - Agent-Native
   - Cybersecurity
   tags_raw:
   - mcp
