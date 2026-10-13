@@ -1,0 +1,22 @@
+generated: '2026-10-13'
+method: searched
+checked:
+- https://aws.amazon.com/marketplace/
+marketplace_apps: []
+edges:
+- partner_name: AWS Marketplace
+  partner: amazon-web-services
+  partner_match: aggregator
+  type: marketplace
+  marketplace: aws-marketplace
+  channel: distribution
+  relationship: platform-app
+  direction: provider-built
+  evidence: https://aws.amazon.com/marketplace/seller-profile?id=seller-2vxjapmpeczok
+  listing_count: 2
+  apps:
+  - DSX for Cloud - Threat Prevention for Cloud and Hybrid Storage
+  - DSX for OnPrem - Threat Prevention for NAS Applications and Endpoint
+  seller_name: Deep Instinct
+  detected_by: sweep-cloud-marketplaces.py
+  detected: '2026-10-13'
